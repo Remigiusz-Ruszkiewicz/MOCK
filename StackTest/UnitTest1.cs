@@ -22,10 +22,12 @@ namespace Tests
             var mock = new Mock<IStorage>();
             Order _order = new Order();
             var service = new OrderService(mock.Object);
-            mock.Setup(s => s.Store(_order)).Returns(3);
-            var result = service.PlaceOrder(_order);
-            mock.Verify(s => s.Store(_order), Times.Once);
-            Assert.That(result,Is.EqualTo(3));
+            //mock.Setup(s => s.Store(_order)).Returns(3);
+            mock.Setup(s => s.Store(null)).Throws(new ArgumentException());
+            var result = service.PlaceOrder(null);
+            //mock.Verify(s => s.Store(_order), Times.Once);
+            Assert.That(result, Is.EqualTo(-1));
+            //Assert.That(result,Is.EqualTo(3));
         }
 
 

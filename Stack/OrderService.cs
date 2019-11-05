@@ -13,9 +13,17 @@ namespace Stack
         }
         public int PlaceOrder(Order order)
         {
-            var orderId = _storage.Store(order);
-            // Some other work
-            return orderId;
+            
+            try
+            {
+                    return _storage.Store(order) * 3;;
+            }
+            catch (ArgumentException ex)
+            {
+                return -1;
+                
+            }
+
         }
     }
     public class Order
